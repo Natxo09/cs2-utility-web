@@ -1,28 +1,55 @@
-# Astro Starter Kit: Basics
+# CS2 Line-ups Viewer
 
-```sh
-npm create astro@latest -- --template basics
+CS2 Line-ups Viewer es una aplicación web interactiva diseñada para ayudar a los jugadores de Counter-Strike 2 a aprender y visualizar diferentes line-ups (posiciones de lanzamiento de utilidades) en varios mapas del juego.
+
+## 🌟 Características
+
+- 🗺️ Filtrado por mapas de CS2
+- 🧨 Filtrado por tipos de utilidades (Humos, Molotov, Flash)
+- 🔍 Barra de búsqueda para encontrar line-ups específicos
+- 📺 Galería de videos de YouTube integrada
+- 📱 Diseño responsive para una experiencia óptima en dispositivos móviles y de escritorio
+
+## 🛠️ Tecnologías utilizadas
+
+- [Astro](https://astro.build) - Framework web moderno
+- HTML5
+- CSS3 (con Tailwind CSS para estilos)
+- TypeScript
+- YouTube API (para la integración de videos)
+
+## 🚀 Inicio rápido
+
+1. Clona este repositorio:
+   ```bash
+   git clone https://github.com/tu-usuario/cs2-lineups-viewer.git
+   ```
+
+2. Navega al directorio del proyecto:
+   ```bash
+   cd cs2-lineups-viewer
+   ```
+
+3. Instala las dependencias:
+   ```bash
+   npm install
+   ```
+
+4. Inicia el servidor de desarrollo:
+   ```bash
+   npm run dev
+   ```
+
+5. Abre tu navegador y visita `http://localhost:4321`
+
+## 📁 Estructura del proyecto
+
 ```
-
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/basics)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/basics/devcontainer.json)
-
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
-
-![just-the-basics](https://github.com/withastro/astro/assets/2244813/a0a5533c-a856-4198-8470-2d67b1d7c554)
-
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
 /
 ├── public/
-│   └── favicon.svg
+│   └── data/
+│       └── [mapname].json
 ├── src/
-│   ├── components/
-│   │   └── Card.astro
 │   ├── layouts/
 │   │   └── Layout.astro
 │   └── pages/
@@ -30,25 +57,30 @@ Inside of your Astro project, you'll see the following folders and files:
 └── package.json
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## 📋 Comandos disponibles
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
-
-Any static assets, like images, can be placed in the `public/` directory.
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
+| Comando                   | Acción                                           |
 | :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+| `npm install`             | Instala las dependencias                         |
+| `npm run dev`             | Inicia el servidor de desarrollo en `localhost:4321` |
+| `npm run build`           | Construye el sitio para producción en `./dist/`  |
+| `npm run preview`         | Previsualiza la construcción antes de desplegar  |
 
-## 👀 Want to learn more?
+## 🤝 Contribuciones
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+Las contribuciones son bienvenidas. Si tienes alguna idea para mejorar la aplicación o añadir nuevas características, no dudes en abrir un issue o realizar un pull request.
+
+## 📄 Licencia
+
+Este proyecto está bajo la Licencia MIT. Consulta el archivo `LICENSE` para más detalles.
+
+## 📞 Contacto
+
+Si tienes alguna pregunta o sugerencia, no dudes en contactarme:
+
+- GitHub: [@tu-usuario](https://github.com/tu-usuario)
+- Email: tu-email@ejemplo.com
+
+---
+
+Hecho con ❤️ para la comunidad de CS2
