@@ -74,13 +74,7 @@ Las contribuciones son bienvenidas. Si tienes alguna idea para mejorar la aplica
 
 Este proyecto está bajo la Licencia MIT. Consulta el archivo `LICENSE` para más detalles.
 
-## 📞 Contacto
-
-Si tienes alguna pregunta o sugerencia, no dudes en contactarme:
-
-- GitHub: [@tu-usuario](https://github.com/tu-usuario)
-- Email: tu-email@ejemplo.com
 
 ---
 
-Hecho con ❤️ para la comunidad de CS2
+Hecho por Natxo con ❤️ para la comunidad de CS2
