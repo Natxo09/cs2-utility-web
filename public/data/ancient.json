@@ -1,0 +1,86 @@
+[
+  {
+    "id": 1,
+    "title": "A Site CT Smoke",
+    "map": "Ancient",
+    "type": "Smoke",
+    "video": "https://youtu.be/i1bdeJr_bLY"
+  },
+  {
+    "id": 2,
+    "title": "A Site Donnut Smoke",
+    "map": "Ancient",
+    "type": "Smoke",
+    "video": "https://youtu.be/eldcIEJQDKM"
+  },
+  {
+    "id": 3,
+    "title": "A Site Templo Smoke",
+    "map": "Ancient",
+    "type": "Smoke",
+    "video": "https://youtu.be/gaSkAxGkWjs"
+  },
+  {
+    "id": 4,
+    "title": "B Site Sol Smoke",
+    "map": "Ancient",
+    "type": "Smoke",
+    "video": "https://youtu.be/8ewrCUgSV24"
+  },
+  {
+    "id": 5,
+    "title": "B Site Sombra Smoke",
+    "map": "Ancient",
+    "type": "Smoke",
+    "video": "https://youtu.be/UDm8o38JhKk"
+  },
+  {
+    "id": 6,
+    "title": "B Site Cueva Smoke",
+    "map": "Ancient",
+    "type": "Smoke",
+    "video": "https://youtu.be/b8X0Ww2aRsU"
+  },
+  {
+    "id": 7,
+    "title": "Mid Donnut Smoke",
+    "map": "Ancient",
+    "type": "Smoke",
+    "video": "https://youtu.be/PbVPbk_i6Dg"
+  },
+  {
+    "id": 8,
+    "title": "Insta Window Spawn 1",
+    "map": "Ancient",
+    "type": "Smoke",
+    "video": "https://youtu.be/HJFHCI-MYV4"
+  },
+  {
+    "id": 9,
+    "title": "Insta Window Spawn 2",
+    "map": "Ancient",
+    "type": "Smoke",
+    "video": "https://youtu.be/kZY4Dnbo_NU"
+  },
+  {
+    "id": 10,
+    "title": "Insta Window Spawn 3",
+    "map": "Ancient",
+    "type": "Smoke",
+    "video": "https://youtu.be/KX_PPywI3d4"
+  },
+  {
+    "id": 11,
+    "title": "Insta Window Spawn 4",
+    "map": "Ancient",
+    "type": "Smoke",
+    "video": "https://youtu.be/Y9P6A4NqUxI"
+  },
+  {
+    "id": 12,
+    "title": "Insta Window Spawn 5",
+    "map": "Ancient",
+    "type": "Smoke",
+    "video": "https://youtu.be/tW2LdqBltlc"
+  }
+]
