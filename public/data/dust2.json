@@ -1,0 +1,18 @@
+[
+    {
+      "id": 1,
+      "title": "A Site CT Smoke",
+      "map": "Dust2",
+      "type": "Smoke",
+      "video": "https://youtu.be/1qyW8-0B1gc",
+      "side": "T"
+    },
+    {
+      "id": 2,
+      "title": "A Site Short Smoke",
+      "map": "Dust2",
+      "type": "Smoke",
+      "video": "https://youtu.be/Y28ig1rK6sw",
+      "side": "T"
+    }
+]

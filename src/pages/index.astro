@@ -100,39 +100,41 @@ const basePath = import.meta.env.BASE_URL.endsWith('/')
     }
   </style>
 
+  <div id="loadingScreen" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+    <div class="text-white text-2xl">Cargando videos...</div>
+  </div>
+
   <script define:vars={{ basePath }}>
     // Referencias a los elementos del DOM
     const videoGallery = document.getElementById('videoGallery');
     const mapFilter = document.getElementById('mapFilter');
     const utilityFilter = document.getElementById('utilityFilter');
     const searchBar = document.getElementById('searchBar');
+    const loadingScreen = document.getElementById('loadingScreen');
 
-    let currentVideos = [];
+    let allVideos = [];
 
     const sideFilter = document.querySelectorAll('input[name="sideFilter"]');
-    // Función para cargar videos desde un archivo JSON
-    async function loadVideos(map) {
-      if (!videoGallery) return;
 
-      if (map === 'all') {
-        videoGallery.innerHTML = '<p class="text-center text-white">Selecciona un mapa para ver los videos.</p>';
-        currentVideos = [];
-        return;
-      }
-      try {
-        const response = await fetch(`${basePath}data/${map}.json`);
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
+    // Función para cargar todos los videos de todos los mapas
+    async function loadAllVideos() {
+      const maps = ['dust2', 'inferno', 'mirage', 'ancient', 'anubis', 'vertigo', 'nuke'];
+      
+      for (const map of maps) {
+        try {
+          const response = await fetch(`${basePath}data/${map}.json`);
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+          const videos = await response.json();
+          allVideos = allVideos.concat(videos);
+        } catch (error) {
+          console.error(`Error cargando los videos de ${map}:`, error);
         }
-        const text = await response.text();
-        //console.log("Respuesta del servidor:", text); // Para depuración
-        currentVideos = JSON.parse(text);
-        renderVideos();
-      } catch (error) {
-        console.error('Error cargando los videos:', error);
-        videoGallery.innerHTML = '<p class="text-center text-red-500">Error al cargar los videos. Por favor, intenta de nuevo más tarde.</p>';
-        currentVideos = [];
       }
+
+      loadingScreen.style.display = 'none';
+      renderVideos();
     }
 
     // Función para renderizar los videos filtrados
@@ -144,19 +146,7 @@ const basePath = import.meta.env.BASE_URL.endsWith('/')
       const searchValue = searchBar.value.toLowerCase();
       const sideValue = document.querySelector('input[name="sideFilter"]:checked')?.value;
 
-      // Si no hay filtros activos y no hay búsqueda, mostrar un mensaje
-      if (mapValue === 'all' && utilityValue === 'all' && sideValue === 'all' && searchValue === '') {
-        videoGallery.innerHTML = '<p class="text-center text-white">Selecciona un mapa o ingresa un término de búsqueda para ver los videos.</p>';
-        return;
-      }
-
-      // Si no hay videos cargados y hay una búsqueda, cargar todos los videos
-      if (currentVideos.length === 0 && searchValue !== '') {
-        loadAllVideos();
-        return; // La función loadAllVideos() llamará a renderVideos() cuando termine
-      }
-
-      const filteredVideos = currentVideos.filter(video => {
+      const filteredVideos = allVideos.filter(video => {
         const matchesMap = mapValue === 'all' || video.map.toLowerCase() === mapValue;
         const matchesUtility = utilityValue === 'all' || video.type.toLowerCase() === utilityValue;
         const matchesSide = sideValue === 'all' || video.side === sideValue || video.side === 'BOTH';
@@ -197,12 +187,14 @@ const basePath = import.meta.env.BASE_URL.endsWith('/')
         videoGallery.appendChild(videoElement);
       });
     }
+
     // Función para extraer el ID del video de YouTube de la URL
     function getYouTubeVideoId(url) {
       const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
       const match = url.match(regExp);
       return (match && match[2].length === 11) ? match[2] : '';
     }
+
     // Función para obtener el icono del bando
     function getSideIcon(side) {
       if (side === 'T') {
@@ -213,46 +205,15 @@ const basePath = import.meta.env.BASE_URL.endsWith('/')
       return '';
     }
 
-    // Función para cargar todos los videos de todos los mapas
-    async function loadAllVideos() {
-      const maps = ['dust2', 'inferno', 'mirage', 'ancient', 'anubis', 'vertigo', 'nuke'];
-      currentVideos = [];
-
-      for (const map of maps) {
-        try {
-          const response = await fetch(`${basePath}data/${map}.json`);
-          if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-          }
-          const videos = await response.json();
-          currentVideos = currentVideos.concat(videos);
-        } catch (error) {
-          console.error(`Error cargando los videos de ${map}:`, error);
-        }
-      }
-
-      renderVideos();
-    }
-
-    // Manejar cambios en el filtro de mapa
-    mapFilter?.addEventListener('change', (e) => {
-      const mapValue = e.target.value.toLowerCase();
-      if (mapValue === 'all') {
-        currentVideos = [];
-        renderVideos(); // Llamamos a renderVideos en lugar de establecer directamente el innerHTML
-      } else {
-        loadVideos(mapValue);
-      }
-    });
-
-    // Manejar cambios en los filtros de utilidad, búsqueda y bando
+    // Manejar cambios en los filtros y búsqueda
+    mapFilter?.addEventListener('change', renderVideos);
     utilityFilter?.addEventListener('change', renderVideos);
     searchBar?.addEventListener('input', renderVideos);
     sideFilter.forEach(radio => {
       radio.addEventListener('change', renderVideos);
     });
 
-    // Cargar videos iniciales
-    loadVideos('all');
+    // Cargar todos los videos al iniciar la página
+    loadAllVideos();
   </script>
 </Layout>
