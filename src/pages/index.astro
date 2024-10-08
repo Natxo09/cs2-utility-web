@@ -11,78 +11,86 @@ const basePath = import.meta.env.BASE_URL.endsWith('/')
 ---
 
 <Layout title="CS2 Line-ups Viewer">
-  <main class="max-w-6xl mx-auto p-4">
-    <h1 class="text-center mb-12 relative">
-      <span class="text-5xl font-extrabold uppercase tracking-wider text-gray-200 inline-block transform skew-x-[-15deg] px-4 py-2 bg-gradient-to-r from-gray-800 to-gray-900 border-b-4 border-[#e0a82e] shadow-lg">
-        CS2 Line-ups
-        <span class="block text-3xl text-[#7877c6]">Viewer</span>
-      </span>
-    </h1>
+  <div class="flex flex-col min-h-screen">
+    <main class="flex-grow">
+      <div class="max-w-6xl mx-auto p-4">
+        <h1 class="text-center mb-12 relative">
+          <span class="text-5xl font-extrabold uppercase tracking-wider text-gray-200 inline-block transform skew-x-[-15deg] px-4 py-2 bg-gradient-to-r from-gray-800 to-gray-900 border-b-4 border-[#e0a82e] shadow-lg">
+            CS2 Line-ups
+            <span class="block text-3xl text-[#7877c6]">Viewer</span>
+          </span>
+        </h1>
 
-    <!-- Barra de búsqueda, Selector de Mapa, Selector de Utilidad y Selector de Bando -->
-    <div class="flex flex-col gap-4 mb-8">
-      <!-- Barra de Búsqueda -->
-      <input
-        id="searchBar"
-        type="text"
-        placeholder="Buscar videos..."
-        class="w-full bg-neutral-800 text-white placeholder-gray-400 border border-neutral-700 rounded-lg p-3 focus:ring-2 focus:ring-[#7877c6] transition duration-300"
-      />
+        <!-- Barra de búsqueda, Selector de Mapa, Selector de Utilidad y Selector de Bando -->
+        <div class="flex flex-col gap-4 mb-8">
+          <!-- Barra de Búsqueda -->
+          <input
+            id="searchBar"
+            type="text"
+            placeholder="Buscar videos..."
+            class="w-full bg-neutral-800 text-white placeholder-gray-400 border border-neutral-700 rounded-lg p-3 focus:ring-2 focus:ring-[#7877c6] transition duration-300"
+          />
 
-      <div class="flex flex-col sm:flex-row gap-4">
-        <!-- Selector de Mapa -->
-        <select id="mapFilter" class="w-full sm:w-1/3 bg-neutral-800 text-white border border-neutral-700 rounded-lg p-3 appearance-none cursor-pointer focus:ring-2 focus:ring-[#7877c6] transition duration-300 bg-[url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20width%3D%2220%22%20height%3D%2220%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath%20d%3D%22M7%207l3-3%203%203m0%206l-3%203-3-3%22%20fill%3D%22none%22%20stroke%3D%22%23fff%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%3C%2Fsvg%3E')] bg-no-repeat bg-[right_0.5rem_center] pr-8">
-          <option value="all">Seleccionar Mapa</option>
-          <option value="dust2">Dust 2</option>
-          <option value="inferno">Inferno</option>
-          <option value="mirage">Mirage</option>
-          <option value="ancient">Ancient</option>
-          <option value="anubis">Anubis</option>
-          <option value="vertigo">Vertigo</option>
-          <option value="nuke">Nuke</option>
-        </select>
+          <div class="flex flex-col sm:flex-row gap-4">
+            <!-- Selector de Mapa -->
+            <select id="mapFilter" class="w-full sm:w-1/3 bg-neutral-800 text-white border border-neutral-700 rounded-lg p-3 appearance-none cursor-pointer focus:ring-2 focus:ring-[#7877c6] transition duration-300 bg-[url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20width%3D%2220%22%20height%3D%2220%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath%20d%3D%22M7%207l3-3%203%203m0%206l-3%203-3-3%22%20fill%3D%22none%22%20stroke%3D%22%23fff%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%3C%2Fsvg%3E')] bg-no-repeat bg-[right_0.5rem_center] pr-8">
+              <option value="all">Seleccionar Mapa</option>
+              <option value="dust2">Dust 2</option>
+              <option value="inferno">Inferno</option>
+              <option value="mirage">Mirage</option>
+              <option value="ancient">Ancient</option>
+              <option value="anubis">Anubis</option>
+              <option value="vertigo">Vertigo</option>
+              <option value="nuke">Nuke</option>
+            </select>
 
-        <!-- Selector de Utilidad -->
-        <select id="utilityFilter" class="w-full sm:w-1/3 bg-neutral-800 text-white border border-neutral-700 rounded-lg p-3 appearance-none cursor-pointer focus:ring-2 focus:ring-[#7877c6] transition duration-300 bg-[url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20width%3D%2220%22%20height%3D%2220%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath%20d%3D%22M7%207l3-3%203%203m0%206l-3%203-3-3%22%20fill%3D%22none%22%20stroke%3D%22%23fff%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%3C%2Fsvg%3E')] bg-no-repeat bg-[right_0.5rem_center] pr-8">
-          <option value="all">Seleccionar Utilidad</option>
-          <option value="Smoke">Humos</option>
-          <option value="Molotov">Molotov</option>
-          <option value="Flash">Flash</option>
-        </select>
+            <!-- Selector de Utilidad -->
+            <select id="utilityFilter" class="w-full sm:w-1/3 bg-neutral-800 text-white border border-neutral-700 rounded-lg p-3 appearance-none cursor-pointer focus:ring-2 focus:ring-[#7877c6] transition duration-300 bg-[url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20width%3D%2220%22%20height%3D%2220%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath%20d%3D%22M7%207l3-3%203%203m0%206l-3%203-3-3%22%20fill%3D%22none%22%20stroke%3D%22%23fff%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%3C%2Fsvg%3E')] bg-no-repeat bg-[right_0.5rem_center] pr-8">
+              <option value="all">Seleccionar Utilidad</option>
+              <option value="Smoke">Humos</option>
+              <option value="Molotov">Molotov</option>
+              <option value="Flash">Flash</option>
+            </select>
 
-        <!-- Selector de Bando -->
-        <div class="flex justify-center sm:justify-end sm:w-1/3">
-          <div class="inline-flex rounded-md shadow-sm" role="group">
-            <label class="inline-flex items-center">
-              <input type="radio" name="sideFilter" value="all" checked class="sr-only">
-              <span class="px-5 py-2.5 text-base font-medium text-white bg-neutral-700 border border-neutral-600 rounded-l-lg hover:bg-neutral-600 focus:z-10 focus:ring-2 focus:ring-[#7877c6] focus:text-white cursor-pointer">
-                Todos
-              </span>
-            </label>
-            <label class="inline-flex items-center">
-              <input type="radio" name="sideFilter" value="T" class="sr-only">
-              <span class="px-5 py-2.5 text-base font-medium text-white bg-neutral-700 border-t border-b border-neutral-600 hover:bg-neutral-600 focus:z-10 focus:ring-2 focus:ring-[#7877c6] focus:text-white cursor-pointer flex items-center">
-                <img src={`${basePath}img/t.png`} alt="T" class="w-6 h-6 mr-2">
-                T
-              </span>
-            </label>
-            <label class="inline-flex items-center">
-              <input type="radio" name="sideFilter" value="CT" class="sr-only">
-              <span class="px-5 py-2.5 text-base font-medium text-white bg-neutral-700 border border-neutral-600 rounded-r-lg hover:bg-neutral-600 focus:z-10 focus:ring-2 focus:ring-[#7877c6] focus:text-white cursor-pointer flex items-center">
-                <img src={`${basePath}img/ct.png`} alt="CT" class="w-6 h-6 mr-2">
-                CT
-              </span>
-            </label>
+            <!-- Selector de Bando -->
+            <div class="flex justify-center sm:justify-end sm:w-1/3">
+              <div class="inline-flex rounded-md shadow-sm" role="group">
+                <label class="inline-flex items-center">
+                  <input type="radio" name="sideFilter" value="all" checked class="sr-only">
+                  <span class="px-5 py-2.5 text-base font-medium text-white bg-neutral-700 border border-neutral-600 rounded-l-lg hover:bg-neutral-600 focus:z-10 focus:ring-2 focus:ring-[#7877c6] focus:text-white cursor-pointer">
+                    Todos
+                  </span>
+                </label>
+                <label class="inline-flex items-center">
+                  <input type="radio" name="sideFilter" value="T" class="sr-only">
+                  <span class="px-5 py-2.5 text-base font-medium text-white bg-neutral-700 border-t border-b border-neutral-600 hover:bg-neutral-600 focus:z-10 focus:ring-2 focus:ring-[#7877c6] focus:text-white cursor-pointer flex items-center">
+                    <img src={`${basePath}img/t.png`} alt="T" class="w-6 h-6 mr-2">
+                    T
+                  </span>
+                </label>
+                <label class="inline-flex items-center">
+                  <input type="radio" name="sideFilter" value="CT" class="sr-only">
+                  <span class="px-5 py-2.5 text-base font-medium text-white bg-neutral-700 border border-neutral-600 rounded-r-lg hover:bg-neutral-600 focus:z-10 focus:ring-2 focus:ring-[#7877c6] focus:text-white cursor-pointer flex items-center">
+                    <img src={`${basePath}img/ct.png`} alt="CT" class="w-6 h-6 mr-2">
+                    CT
+                  </span>
+                </label>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
 
-    <!-- Galería de Videos -->
-    <div id="videoGallery" class="grid grid-cols-1 sm:grid-cols-2 gap-8">
-      <!-- Aquí se mostrarán los videos filtrados -->
-    </div>
-  </main>
+        <!-- Galería de Videos -->
+        <div id="videoGallery" class="grid grid-cols-1 sm:grid-cols-2 gap-8">
+          <!-- Aquí se mostrarán los videos filtrados -->
+        </div>
+      </div>
+    </main>
+
+    <footer class="text-center py-6 text-gray-400">
+      <p>Hecho por <a href="https://twitch.tv/natxo" target="_blank" rel="noopener noreferrer" class="text-[#e0a82e]">Natxo</a> con ❤️ para mis tryhards</p>
+    </footer>
+  </div>
 
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@600;700&display=swap');
