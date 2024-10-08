@@ -12,7 +12,7 @@ import Layout from '../layouts/Layout.astro';
       </span>
     </h1>
 
-    <!-- Barra de búsqueda, Selector de Mapa y Selector de Utilidad -->
+    <!-- Barra de búsqueda, Selector de Mapa, Selector de Utilidad y Selector de Bando -->
     <div class="flex flex-col sm:flex-row gap-4 mb-8 items-center justify-center">
       <!-- Barra de Búsqueda -->
       <input
@@ -41,6 +41,28 @@ import Layout from '../layouts/Layout.astro';
         <option value="Molotov">Molotov</option>
         <option value="Flash">Flash</option>
       </select>
+
+      <!-- Selector de Bando -->
+      <div class="flex items-center space-x-4">
+        <label class="inline-flex items-center">
+          <input type="radio" name="sideFilter" value="all" checked class="form-radio text-[#7877c6] hidden">
+          <span class="ml-2 text-white cursor-pointer px-3 py-1 rounded-full bg-neutral-700 hover:bg-neutral-600 transition-colors">Todos</span>
+        </label>
+        <label class="inline-flex items-center">
+          <input type="radio" name="sideFilter" value="T" class="form-radio text-[#7877c6] hidden">
+          <span class="ml-2 cursor-pointer px-3 py-1 rounded-full bg-neutral-700 hover:bg-neutral-600 transition-colors flex items-center">
+            <img src={`${import.meta.env.BASE_URL}img/t.png`} alt="T" class="w-6 h-6 mr-1">
+            <span class="text-white">T</span>
+          </span>
+        </label>
+        <label class="inline-flex items-center">
+          <input type="radio" name="sideFilter" value="CT" class="form-radio text-[#7877c6] hidden">
+          <span class="ml-2 cursor-pointer px-3 py-1 rounded-full bg-neutral-700 hover:bg-neutral-600 transition-colors flex items-center">
+            <img src={`${import.meta.env.BASE_URL}img/ct.png`} alt="CT" class="w-6 h-6 mr-1">
+            <span class="text-white">CT</span>
+          </span>
+        </label>
+      </div>
     </div>
 
     <!-- Galería de Videos -->
@@ -64,7 +86,8 @@ import Layout from '../layouts/Layout.astro';
       title: string;
       map: string;
       type: string;
-      video: string;  // Cambiado de 'file' a 'video'
+      video: string;
+      side: string;
     }
 
     // Referencias a los elementos del DOM
@@ -74,6 +97,8 @@ import Layout from '../layouts/Layout.astro';
     const searchBar = document.getElementById('searchBar') as HTMLInputElement | null;
 
     let currentVideos: Video[] = [];
+
+    const sideFilter = document.querySelectorAll('input[name="sideFilter"]');
 
     // Función para cargar videos desde un archivo JSON
     async function loadVideos(map: string) {
@@ -104,13 +129,15 @@ import Layout from '../layouts/Layout.astro';
     function renderVideos() {
       if (!videoGallery || !utilityFilter || !searchBar) return;
 
-      const utilityValue = utilityFilter.value.toLowerCase();
-      const searchValue = searchBar.value.toLowerCase();
+      const utilityValue = utilityFilter?.value?.toLowerCase() ?? '';
+      const searchValue = searchBar?.value?.toLowerCase() ?? '';
+      const sideValue = (document.querySelector('input[name="sideFilter"]:checked') as HTMLInputElement)?.value;
 
       const filteredVideos = currentVideos.filter(video => {
         const matchesUtility = utilityValue === 'all' || video.type.toLowerCase() === utilityValue;
         const matchesSearch = video.title.toLowerCase().includes(searchValue);
-        return matchesUtility && matchesSearch;
+        const matchesSide = sideValue === 'all' || video.side === sideValue || video.side === 'BOTH';
+        return matchesUtility && matchesSearch && matchesSide;
       });
 
       videoGallery.innerHTML = '';
@@ -130,6 +157,10 @@ import Layout from '../layouts/Layout.astro';
             <div class="flex justify-between items-center">
               <p class="font-semibold text-[#7877c6]">${video.map}</p>
               <span class="text-gray-300 bg-neutral-700 px-2 py-1 rounded-full text-sm">${video.type}</span>
+              <span class="text-gray-300 bg-neutral-700 px-2 py-1 rounded-full text-sm flex items-center">
+                ${getSideIcon(video.side)}
+                ${video.side}
+              </span>
             </div>
           </div>
         `;
@@ -144,15 +175,28 @@ import Layout from '../layouts/Layout.astro';
       return (match && match[2].length === 11) ? match[2] : '';
     }
 
+    // Función para obtener el icono del bando
+    function getSideIcon(side: string): string {
+      if (side === 'T') {
+        return `<img src="${import.meta.env.BASE_URL}img/t.png" alt="T" class="w-4 h-4 mr-1">`;
+      } else if (side === 'CT') {
+        return `<img src="${import.meta.env.BASE_URL}img/ct.png" alt="CT" class="w-4 h-4 mr-1">`;
+      }
+      return '';
+    }
+
     // Manejar cambios en el filtro de mapa
     mapFilter?.addEventListener('change', async (e) => {
       const mapValue = (e.target as HTMLSelectElement).value.toLowerCase();
       await loadVideos(mapValue);
     });
 
-    // Manejar cambios en los filtros de utilidad y búsqueda
+    // Manejar cambios en los filtros de utilidad, búsqueda y bando
     utilityFilter?.addEventListener('change', renderVideos);
     searchBar?.addEventListener('input', renderVideos);
+    sideFilter.forEach(radio => {
+      radio.addEventListener('change', renderVideos);
+    });
 
     // Cargar videos iniciales
     loadVideos('all');

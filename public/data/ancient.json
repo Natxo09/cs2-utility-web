@@ -4,83 +4,95 @@
     "title": "A Site CT Smoke",
     "map": "Ancient",
     "type": "Smoke",
-    "video": "https://youtu.be/i1bdeJr_bLY"
+    "video": "https://youtu.be/i1bdeJr_bLY",
+    "side": "T"
   },
   {
     "id": 2,
     "title": "A Site Donnut Smoke",
     "map": "Ancient",
     "type": "Smoke",
-    "video": "https://youtu.be/eldcIEJQDKM"
+    "video": "https://youtu.be/eldcIEJQDKM",
+    "side": "T"
   },
   {
     "id": 3,
     "title": "A Site Templo Smoke",
     "map": "Ancient",
     "type": "Smoke",
-    "video": "https://youtu.be/gaSkAxGkWjs"
+    "video": "https://youtu.be/gaSkAxGkWjs",
+    "side": "T"
   },
   {
     "id": 4,
     "title": "B Site Sol Smoke",
     "map": "Ancient",
     "type": "Smoke",
-    "video": "https://youtu.be/8ewrCUgSV24"
+    "video": "https://youtu.be/8ewrCUgSV24",
+    "side": "T"
   },
   {
     "id": 5,
     "title": "B Site Sombra Smoke",
     "map": "Ancient",
     "type": "Smoke",
-    "video": "https://youtu.be/UDm8o38JhKk"
+    "video": "https://youtu.be/UDm8o38JhKk",
+    "side": "T"
   },
   {
     "id": 6,
     "title": "B Site Cueva Smoke",
     "map": "Ancient",
     "type": "Smoke",
-    "video": "https://youtu.be/b8X0Ww2aRsU"
+    "video": "https://youtu.be/b8X0Ww2aRsU",
+    "side": "T"
   },
   {
     "id": 7,
     "title": "Mid Donnut Smoke",
     "map": "Ancient",
     "type": "Smoke",
-    "video": "https://youtu.be/PbVPbk_i6Dg"
+    "video": "https://youtu.be/PbVPbk_i6Dg",
+    "side": "T"
   },
   {
     "id": 8,
     "title": "Insta Window Spawn 1",
     "map": "Ancient",
     "type": "Smoke",
-    "video": "https://youtu.be/HJFHCI-MYV4"
+    "video": "https://youtu.be/HJFHCI-MYV4",
+    "side": "T"
   },
   {
     "id": 9,
     "title": "Insta Window Spawn 2",
     "map": "Ancient",
     "type": "Smoke",
-    "video": "https://youtu.be/kZY4Dnbo_NU"
+    "video": "https://youtu.be/kZY4Dnbo_NU",
+    "side": "T"
   },
   {
     "id": 10,
     "title": "Insta Window Spawn 3",
     "map": "Ancient",
     "type": "Smoke",
-    "video": "https://youtu.be/KX_PPywI3d4"
+    "video": "https://youtu.be/KX_PPywI3d4",
+    "side": "T"
   },
   {
     "id": 11,
     "title": "Insta Window Spawn 4",
     "map": "Ancient",
     "type": "Smoke",
-    "video": "https://youtu.be/Y9P6A4NqUxI"
+    "video": "https://youtu.be/Y9P6A4NqUxI",
+    "side": "T"
   },
   {
     "id": 12,
     "title": "Insta Window Spawn 5",
     "map": "Ancient",
     "type": "Smoke",
-    "video": "https://youtu.be/tW2LdqBltlc"
+    "video": "https://youtu.be/tW2LdqBltlc",
+    "side": "T"
   }
 ]
