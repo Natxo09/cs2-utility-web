@@ -137,20 +137,40 @@ const basePath = import.meta.env.BASE_URL.endsWith('/')
 
     // Función para renderizar los videos filtrados
     function renderVideos() {
-      if (!videoGallery || !utilityFilter || !searchBar) return;
+      if (!videoGallery || !mapFilter || !utilityFilter || !searchBar) return;
 
+      const mapValue = mapFilter.value.toLowerCase();
       const utilityValue = utilityFilter.value.toLowerCase();
       const searchValue = searchBar.value.toLowerCase();
       const sideValue = document.querySelector('input[name="sideFilter"]:checked')?.value;
 
+      // Si no hay filtros activos y no hay búsqueda, mostrar un mensaje
+      if (mapValue === 'all' && utilityValue === 'all' && sideValue === 'all' && searchValue === '') {
+        videoGallery.innerHTML = '<p class="text-center text-white">Selecciona un mapa o ingresa un término de búsqueda para ver los videos.</p>';
+        return;
+      }
+
+      // Si no hay videos cargados y hay una búsqueda, cargar todos los videos
+      if (currentVideos.length === 0 && searchValue !== '') {
+        loadAllVideos();
+        return; // La función loadAllVideos() llamará a renderVideos() cuando termine
+      }
+
       const filteredVideos = currentVideos.filter(video => {
+        const matchesMap = mapValue === 'all' || video.map.toLowerCase() === mapValue;
         const matchesUtility = utilityValue === 'all' || video.type.toLowerCase() === utilityValue;
-        const matchesSearch = video.title.toLowerCase().includes(searchValue);
         const matchesSide = sideValue === 'all' || video.side === sideValue || video.side === 'BOTH';
-        return matchesUtility && matchesSearch && matchesSide;
+        const matchesSearch = video.title.toLowerCase().includes(searchValue);
+
+        return matchesMap && matchesUtility && matchesSide && matchesSearch;
       });
 
       videoGallery.innerHTML = '';
+      if (filteredVideos.length === 0) {
+        videoGallery.innerHTML = '<p class="text-center text-white">No se encontraron videos que coincidan con los criterios de búsqueda.</p>';
+        return;
+      }
+
       filteredVideos.forEach(video => {
         const videoElement = document.createElement('div');
         videoElement.classList.add('bg-neutral-800', 'border', 'border-neutral-700', 'rounded-xl', 'overflow-hidden', 'shadow-lg', 'p-4', 'flex', 'flex-col', 'justify-between', 'transition', 'duration-300', 'hover:shadow-xl', 'hover:border-[#7877c6]');
@@ -193,10 +213,36 @@ const basePath = import.meta.env.BASE_URL.endsWith('/')
       return '';
     }
 
+    // Función para cargar todos los videos de todos los mapas
+    async function loadAllVideos() {
+      const maps = ['dust2', 'inferno', 'mirage', 'ancient', 'anubis', 'vertigo', 'nuke'];
+      currentVideos = [];
+
+      for (const map of maps) {
+        try {
+          const response = await fetch(`${basePath}data/${map}.json`);
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+          const videos = await response.json();
+          currentVideos = currentVideos.concat(videos);
+        } catch (error) {
+          console.error(`Error cargando los videos de ${map}:`, error);
+        }
+      }
+
+      renderVideos();
+    }
+
     // Manejar cambios en el filtro de mapa
     mapFilter?.addEventListener('change', (e) => {
       const mapValue = e.target.value.toLowerCase();
-      loadVideos(mapValue);
+      if (mapValue === 'all') {
+        currentVideos = [];
+        renderVideos(); // Llamamos a renderVideos en lugar de establecer directamente el innerHTML
+      } else {
+        loadVideos(mapValue);
+      }
     });
 
     // Manejar cambios en los filtros de utilidad, búsqueda y bando
